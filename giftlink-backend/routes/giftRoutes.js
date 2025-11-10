@@ -1,3 +1,7 @@
+const express = require('express');
+const router = express.Router();
+const connectToDatabase = require('../models/db');
+
 router.get('/', async (req, res) => {
     try {
         // Task 1: Connect to MongoDB and store connection to db constant
@@ -25,7 +29,7 @@ router.get('/:id', async (req, res) => {
         // Task 2: use the collection() method to retrieve the gift collection
         const collection = db.collection("gifts");
 
-        const id = req.params.id;
+        const id = parseInt(req.params.id, 10);
 
         // Task 3: Find a specific gift by ID using the collection.fineOne method and store in constant called gift
         const gift = await collection.findOne({ id: id});
