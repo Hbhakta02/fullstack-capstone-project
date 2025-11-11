@@ -12,11 +12,11 @@ function MainPage() {
         // fetch all gifts
         const fetchGifts = async () => {
             try {
-                let url = '${urlConfig.backendUrl}/api/gifts'
+                let url = `${urlConfig.backendUrl}/api/gifts`
                 const response = await fetch(url);
                 if (!response.ok) {
                     // something went wrong
-                    throw new Error('HTTP error; ${response.status}')
+                    throw new Error(`HTTP error: ${response.status}`)
                 }
                 const data = await response.json();
                 setGifts(data);
@@ -30,7 +30,7 @@ function MainPage() {
     // Task 2: Navigate to details page
     const goToDetailsPage = (productId) => {
         // Write your code below this line
-        navigate('/app/product/${productId}');
+        navigate(`/app/product/${productId}`);
       };
 
     // Task 3: Format timestamp
@@ -73,7 +73,7 @@ function MainPage() {
                                 </p>
                             </div>
                             <div className="card-footer">
-                                <button onClick={() => goToDetailsPage(gift.id)} className="btn btn-primary w-100">
+                                <button onClick={() => goToDetailsPage(gift._id)} className="btn btn-primary w-100">
                                     View Details
                                 </button>
                             </div>

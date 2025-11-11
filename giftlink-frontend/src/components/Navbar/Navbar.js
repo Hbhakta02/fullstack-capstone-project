@@ -5,11 +5,12 @@ import { useAppContext } from '../../context/AuthContext';
 
 export default function Navbar() {
     const { isLoggedIn, setIsLoggedIn, userName, setUserName } = useAppContext();
-
-  const navigate=useNavigate();
+    const navigate=useNavigate();
+    
     useEffect(() => {
         const authTokenFromSession = sessionStorage.getItem('auth-token');
         const nameFromSession = sessionStorage.getItem('name');
+
         if (authTokenFromSession) {
             if(isLoggedIn && nameFromSession) {
               setUserName(nameFromSession);
@@ -21,6 +22,7 @@ export default function Navbar() {
             }
         }
     },[isLoggedIn, setIsLoggedIn, setUserName])
+    
     const handleLogout=()=>{
         sessionStorage.removeItem('auth-token');
         sessionStorage.removeItem('name');
@@ -29,12 +31,14 @@ export default function Navbar() {
         navigate(`/app`);
 
     }
+   
     const profileSecton=()=>{
       navigate(`/app/profile`);
-    }
+    };
+    
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light" id='navbar_container'>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light" id='navbar_container'>
         <a className="navbar-brand" href={`${urlConfig.backendUrl}/app`}>GiftLink</a>
 
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,23 +58,23 @@ export default function Navbar() {
             </li>
             <ul className="navbar-nav ml-auto">
             {isLoggedIn ? (
-                                    <>
-                                    <li className="nav-item"> <span className="nav-link" style={{color: "black", cursor:"pointer"}} onClick={profileSecton}>Welcome, {userName}</span> </li>
-                                    <li className="nav-item"><button className="nav-link login-btn" onClick={handleLogout}>Logout</button></li>
-                                    </>
-                                    )  : (
-                                    <>
-                                        <li className="nav-item">
+            <>
+                <li className="nav-item"> <span className="nav-link" style={{color: "black", cursor:"pointer"}} onClick={profileSecton}>Welcome, {userName}</span> </li>
+                    <li className="nav-item"><button className="nav-link login-btn" onClick={handleLogout}>Logout</button></li>
+                        </>
+                         )  : (
+                        <>
+                            <li className="nav-item">
 
-                                        <Link className="nav-link login-btn" to="/app/login">Login</Link>
-                                        </li>
-                                        <li className="nav-item">
-                                        <Link className="nav-link register-btn" to="/app/register">Register</Link>
-                                        </li>
-                                    </>
-                                )
+                                <Link className="nav-link login-btn" to="/app/login">Login</Link>
+                                </li>
+                                <li className="nav-item">
+                                <Link className="nav-link register-btn" to="/app/register">Register</Link>
+                                </li>
+                        </>
+                            )
 
-                                }
+            }
             </ul>
           </ul>
         </div>

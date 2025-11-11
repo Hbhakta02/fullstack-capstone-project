@@ -15,6 +15,7 @@ function DetailsPage() {
         if (!authenticationToken) {
 			// Task 1: Check for authentication and redirect
             navigate('/app/login');
+            return;
         }
 
         // get the gift to be rendered on the details page
@@ -38,13 +39,12 @@ function DetailsPage() {
         fetchGift();
 
 		// Task 3: Scroll to top on component mount
-		window.SecurityPolicyViolationEvent(0, 0);
+		window.scrollTo(0, 0);
 
     }, [productId, navigate]);
 
-
+	// Task 4: Handle back click
     const handleBackClick = () => {
-		// Task 4: Handle back click
 		navigate(-1);
 	};
 
@@ -93,7 +93,7 @@ return (
                             <div className="no-image-available-large">No Image Available</div>
                         )}
                     </div>
-                    // Task 6: Display gift details
+                    {/* Task 6: Display gift details */}
                     <p><strong>Category:</strong> 
                         {gift.category}
 			        </p>
@@ -101,7 +101,7 @@ return (
                         {gift.condition}
                     </p>
                     <p><strong>Date Added:</strong> 
-                        {gift.dateAdded}
+                        {gift.date_added}
                     </p>
                     <p><strong>Age (Years):</strong> 
                         {gift.age}
@@ -113,7 +113,7 @@ return (
             </div>
             <div className="comments-section mt-4">
                 <h3 className="mb-3">Comments</h3>
-				// Task 7: Render comments section by using the map function to go through all the comments
+				{/* Task 7: Render comments section by using the map function to go through all the comments */}
 				{comments.map((comment, index) => (
                     <div key={index} className="card mb-3">
                         <div className="card-body">

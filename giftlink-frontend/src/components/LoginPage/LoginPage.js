@@ -59,11 +59,11 @@ function LoginPage() {
           navigate('/app');
         } else {
             //Step 2: Task 5
-          document.getElementById("email").value="";
-          document.getElementById("password").value="";
+          setEmail('');
+          setPassword('');
           setIncorrect("Wrong password. Try again.");
           setTimeout(() => {
-            setIncorrect("");
+            setIncorrect('');
           }, 2000);
         }
       }
@@ -76,7 +76,7 @@ function LoginPage() {
                 <h2 className="text-center mb-4 font-weight-bold">Login</h2>
                 
                 {/* insert code here to create input elements for the variables email and  password */}
-                <div className='"mb-3'>
+                <div className='mb-3'>
                     <label htmlFor='email' className='form-label'>Email</label>
                     <input
                         id="email"
@@ -88,7 +88,7 @@ function LoginPage() {
                     />
                 </div>
 
-                <div className='"mb-4'>
+                <div className='mb-4'>
                     <label htmlFor='password' className='form-label'>Password</label>
                     <input
                         id="password"

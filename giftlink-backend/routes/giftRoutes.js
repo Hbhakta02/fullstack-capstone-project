@@ -29,7 +29,19 @@ router.get('/:id', async (req, res) => {
         // Task 2: use the collection() method to retrieve the gift collection
         const collection = db.collection("gifts");
 
-        const id = parseInt(req.params.id, 10);
+        //const id = parseInt(req.params.id, 10);
+
+        const { id } = req.params;
+
+        let query;
+
+        if (ObjectId.isValid(id)) {
+            query = { _id: new ObjectId(id) };
+        } else {
+            // fallback if you also support numeric id
+            query = { id: parseInt(id, 10) };
+        }
+
 
         // Task 3: Find a specific gift by ID using the collection.fineOne method and store in constant called gift
         const gift = await collection.findOne({ id: id});
