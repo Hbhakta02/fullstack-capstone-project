@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { body, validationResult } = require('express-validator');
 const connectToDatabase = require('../models/db');
 const router = express.Router();
 const dotenv = require('dotenv');
