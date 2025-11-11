@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const connectToDatabase = require('../models/db');
+const { ObjectId } = require('mongodb');
 
 router.get('/', async (req, res) => {
     try {
@@ -31,8 +32,21 @@ router.get('/:id', async (req, res) => {
 
         const id = req.params.id;
 
+        let gift = null;
+
         // Task 3: Find a specific gift by ID using the collection.fineOne method and store in constant called gift
-        const gift = await collection.findOne({ id: id});
+        gift = await collection.findOne({ id: id});
+
+        //temp
+        if (!gift && !Number.isNaN(parseInt(id, 10))) {
+            gift = await collection.findOne({ id: parseInt(id, 10) });
+        }
+
+        // 3) temp
+        if (!gift && ObjectId.isValid(id)) {
+            gift = await collection.findOne({ _id: new ObjectId(id) });
+        }
+
 
         if (!gift) {
             return res.status(404).send('Gift not found');

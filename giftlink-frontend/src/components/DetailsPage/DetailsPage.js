@@ -16,7 +16,7 @@ function DetailsPage() {
 
         if (!authenticationToken) {
 			// Task 1: Check for authentication and redirect
-            navigate(`/app/product/${productId}`);
+            navigate('/app/login');
             return;
         }
 
