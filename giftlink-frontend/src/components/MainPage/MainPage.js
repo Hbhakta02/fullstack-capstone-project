@@ -73,7 +73,7 @@ function MainPage() {
                                 </p>
                             </div>
                             <div className="card-footer">
-                                <button onClick={() => goToDetailsPage(gift._id)} className="btn btn-primary w-100">
+                                <button onClick={() => goToDetailsPage(gift.id)} className="btn btn-primary w-100">
                                     View Details
                                 </button>
                             </div>

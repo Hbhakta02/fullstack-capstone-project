@@ -12,9 +12,11 @@ function DetailsPage() {
 
 	useEffect(() => {
         const authenticationToken = sessionStorage.getItem('auth-token');
+        console.log('productId:', productId);
+
         if (!authenticationToken) {
 			// Task 1: Check for authentication and redirect
-            navigate('/app/login');
+            navigate(`/app/product/${productId}`);
             return;
         }
 
@@ -24,6 +26,7 @@ function DetailsPage() {
 				// Task 2: Fetch gift details
                 const url = `${urlConfig.backendUrl}/api/gifts/${productId}`;
                 const response = await fetch(url);
+                console.log('Details fetch status:', response.status);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

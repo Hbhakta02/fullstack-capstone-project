@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const connectToDatabase = require('../models/db');
-const { ObjectId } = require('mongodb'); //temp
 
 router.get('/', async (req, res) => {
     try {
@@ -30,24 +29,7 @@ router.get('/:id', async (req, res) => {
         // Task 2: use the collection() method to retrieve the gift collection
         const collection = db.collection("gifts");
 
-        //const id = parseInt(req.params.id, 10);
-
-        const { id } = req.params;
-
-        let query;
-
-        if (ObjectId.isValid(id)) {
-            query = { _id: new ObjectId(id) };
-        } else {
-            // fallback: if you *also* support numeric ids
-            const numericId = parseInt(id, 10);
-        if (Number.isNaN(numericId)) {
-            return res.status(400).send('Invalid ID format');
-        }
-        query = { id: numericId };
-        }
-
-
+        const id = req.params.id;
 
         // Task 3: Find a specific gift by ID using the collection.fineOne method and store in constant called gift
         const gift = await collection.findOne({ id: id});
@@ -62,7 +44,6 @@ router.get('/:id', async (req, res) => {
         res.status(500).send('Error fetching gift');
     }
 });
-
 
 
 // Add a new gift
